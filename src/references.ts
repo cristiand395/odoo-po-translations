@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as path from 'path';
 import * as fs from 'fs';
-import { parsePo } from './parser';
+import { getEntries } from './parseCache';
 
 /**
  * Lets Ctrl/Cmd-click on a `#: addons/sale/models/sale.py:142` reference jump
@@ -13,7 +13,7 @@ export class PoDefinitionProvider implements vscode.DefinitionProvider {
     doc: vscode.TextDocument,
     position: vscode.Position
   ): Promise<vscode.Definition | undefined> {
-    const entries = parsePo(doc.getText());
+    const entries = getEntries(doc);
     for (const entry of entries) {
       for (const ref of entry.references) {
         if (
@@ -51,8 +51,14 @@ async function resolveReference(
 
   const normalized = relFile.replace(/\\/g, '/');
   for (const root of roots) {
-    const candidate = path.join(root, normalized);
-    if (fs.existsSync(candidate)) {
+    const candidate = path.resolve(root, normalized);
+    // Containment: never resolve a reference outside the root. A crafted .po
+    // could otherwise use "../.." to probe or open arbitrary files on disk.
+    const rel = path.relative(root, candidate);
+    if (rel === '' || rel.startsWith('..') || path.isAbsolute(rel)) {
+      continue;
+    }
+    if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) {
       return vscode.Uri.file(candidate);
     }
   }

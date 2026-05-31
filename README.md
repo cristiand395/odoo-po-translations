@@ -1,5 +1,7 @@
 # Odoo PO Translations
 
+[![CI](https://github.com/cristiand395/odoo-po-translations/actions/workflows/ci.yml/badge.svg)](https://github.com/cristiand395/odoo-po-translations/actions/workflows/ci.yml)
+
 > Resaltado de sintaxis y validación para archivos de traducción **`.po` / `.pot`**
 > de *gettext*, afinado para el desarrollo en **Odoo**.
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.5
+
+- **Seguridad**: el resolutor de referencias `#:` ahora contiene la ruta dentro
+  de la raíz del proyecto (evita que un `.po` malicioso abra archivos fuera del
+  workspace con `../`) y exige que el destino sea un archivo.
+- Integración continua (GitHub Actions): compila, tests y empaquetado.
+- Plantillas de issues y de pull request.
+
 ## 0.9.4
 
 - Eliminadas las referencias a capturas del README (se añadirán más adelante).

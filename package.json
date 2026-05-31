@@ -2,7 +2,7 @@
   "name": "odoo-po-translations",
   "displayName": "Odoo PO Translations",
   "description": "Resaltado de sintaxis y linting para archivos .po/.pot de gettext, afinado para el desarrollo en Odoo.",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "publisher": "cristiand395",
   "license": "MIT",
   "icon": "media/icon.png",
