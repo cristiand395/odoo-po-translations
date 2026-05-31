@@ -1,0 +1,20 @@
+# Source & build tooling (we ship only the bundled dist/)
+src/**
+out/**
+test/**
+scripts/**
+samples/**
+node_modules/**
+.vscode/**
+.github/**
+
+esbuild.js
+tsconfig.json
+.gitignore
+**/*.ts
+**/*.map
+**/tsconfig.json
+
+# Keep: dist/**, media/**, syntaxes/**, language-configuration.json,
+#       package.json, README.md, CHANGELOG.md, LICENSE
+media/icon.svg

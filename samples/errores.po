@@ -1,0 +1,37 @@
+#  Archivo para FORZAR cada tipo de error y ver la barra de estado.
+#  Resultado esperado:  🌐 PO  ⛔3  ⊘1  ✎1  ⧉1  </>1   (fondo rojo)
+#    ⛔ 3 placeholders  ·  ⊘ 1 sin traducir  ·  ✎ 1 fuzzy  ·  ⧉ 1 duplicado  ·  </> 1 HTML
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#  (A) SIN TRADUCIR  ->  ⊘ +1
+msgid "Save"
+msgstr ""
+
+#  (B) FUZZY  ->  ✎ +1
+#, fuzzy
+msgid "Cancel"
+msgstr "Cancelar"
+
+#  (C) PLACEHOLDER QUE FALTA  ->  ⛔ +1  (la traducción perdió %(name)s)
+#, python-format
+msgid "Hello %(name)s"
+msgstr "Hola"
+
+#  (D) PLACEHOLDER QUE SOBRA  ->  ⛔ +1  (%s no existe en el original)
+#, python-format
+msgid "Done"
+msgstr "Hecho %s"
+
+#  (E) PLACEHOLDER BRACE QUE FALTA  ->  ⛔ +1  (falta {count})
+msgid "{count} items"
+msgstr "elementos"
+
+#  (F) MSGID DUPLICADO  ->  ⧉ +1  (repite "Save" de la entrada A)
+msgid "Save"
+msgstr "Guardar"
+
+#  (G) HTML INCONSISTENTE  ->  </> +1  (la traducción perdió el cierre </b>)
+msgid "Press <b>Save</b> now"
+msgstr "Presiona <b>Guardar ahora"

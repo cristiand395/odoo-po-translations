@@ -1,0 +1,26 @@
+#  Plantilla (.pot): todos los msgstr van vacíos A PROPÓSITO.
+#  La extensión NO debe marcar "sin traducir" aquí (⊘ = 0).
+#  Sí seguiría marcando un msgid duplicado.
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#. module: sale
+#: model:ir.model.fields,field_description:sale.field_sale_order__name
+msgid "Order Reference"
+msgstr ""
+
+#: addons/sale/models/sale_order.py:142
+#, python-format
+msgid "Order %(name)s confirmed"
+msgstr ""
+
+#: addons/sale/models/sale_order.py:88
+msgid "{count} line"
+msgid_plural "{count} lines"
+msgstr[0] ""
+msgstr[1] ""
+
+#  Este sí: msgid duplicado (⧉ +1)
+msgid "Order Reference"
+msgstr ""

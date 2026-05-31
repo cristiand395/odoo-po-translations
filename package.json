@@ -1,0 +1,160 @@
+{
+  "name": "odoo-po-translations",
+  "displayName": "Odoo PO Translations",
+  "description": "Resaltado de sintaxis y linting para archivos .po/.pot de gettext, afinado para el desarrollo en Odoo.",
+  "version": "0.9.4",
+  "publisher": "cristiand395",
+  "license": "MIT",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#5C3A52",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cristiand395/odoo-po-translations.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cristiand395/odoo-po-translations/issues"
+  },
+  "homepage": "https://github.com/cristiand395/odoo-po-translations#readme",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "keywords": [
+    "po",
+    "pot",
+    "gettext",
+    "odoo",
+    "translation",
+    "i18n",
+    "l10n"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "contributes": {
+    "languages": [
+      {
+        "id": "po",
+        "aliases": [
+          "Gettext PO",
+          "po"
+        ],
+        "extensions": [
+          ".po",
+          ".pot"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "po",
+        "scopeName": "source.po",
+        "path": "./syntaxes/po.tmLanguage.json"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "odooPo",
+          "title": "Odoo PO",
+          "icon": "media/activity.svg"
+        }
+      ]
+    },
+    "views": {
+      "odooPo": [
+        {
+          "id": "poProblems",
+          "name": "Problemas de traducción"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "poProblems",
+        "contents": "No hay problemas de traducción detectados en el workspace, o aún no se ha escaneado.\n[Escanear workspace](command:odooPo.scanWorkspace)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "odooPo.validateFile",
+        "title": "Validar archivo de traducción",
+        "category": "Odoo PO"
+      },
+      {
+        "command": "odooPo.scanWorkspace",
+        "title": "Escanear todo el workspace",
+        "category": "Odoo PO",
+        "icon": "$(refresh)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "odooPo.scanWorkspace",
+          "when": "view == poProblems",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Odoo PO Translations",
+      "properties": {
+        "odooPo.warnOnFuzzy": {
+          "type": "boolean",
+          "default": true,
+          "description": "Marcar las entradas marcadas como 'fuzzy' (pendientes de revisión)."
+        },
+        "odooPo.warnOnEmptyMsgstr": {
+          "type": "boolean",
+          "default": true,
+          "description": "Marcar entradas con msgstr vacío (sin traducir)."
+        },
+        "odooPo.checkPlaceholders": {
+          "type": "boolean",
+          "default": true,
+          "description": "Verificar que los placeholders (%s, %(name)s, {}, {name}) coincidan entre msgid y msgstr."
+        },
+        "odooPo.checkHtml": {
+          "type": "boolean",
+          "default": true,
+          "description": "Verificar que las etiquetas HTML (<a>, <br/>, <span>…) coincidan entre msgid y msgstr."
+        },
+        "odooPo.highlightFuzzy": {
+          "type": "boolean",
+          "default": true,
+          "description": "Resaltar con un fondo las entradas marcadas como 'fuzzy' en el editor."
+        },
+        "odooPo.scanWorkspaceOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Reescanear todo el workspace al guardar un .po. Desactivado por defecto: en proyectos Odoo grandes el escaneo completo es costoso; úsalo manualmente desde la vista 'Problemas de traducción'."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "node esbuild.js --watch",
+    "esbuild": "node esbuild.js",
+    "build:icon": "node scripts/build-icon.js",
+    "test": "npm run compile && node --test",
+    "vscode:prepublish": "node esbuild.js --production",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.75.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.23.0",
+    "sharp": "^0.33.0",
+    "typescript": "^5.4.0"
+  }
+}
